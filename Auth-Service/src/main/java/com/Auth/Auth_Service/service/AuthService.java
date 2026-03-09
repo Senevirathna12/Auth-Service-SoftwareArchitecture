@@ -45,6 +45,7 @@ public class AuthService {
         userRepository.save(user);
 
         UserRespDTO userResp = UserRespDTO.builder()
+                .id(user.getId())
                 .email(user.getEmail())
                 .role(user.getRole().name())
                 .companyName(user.getCompanyName())
@@ -69,6 +70,7 @@ public class AuthService {
 
         // Generate token
         String token = jwtUtil.generateToken(
+                user.getId(),
                 user.getEmail(),
                 user.getRole().name()
         );
